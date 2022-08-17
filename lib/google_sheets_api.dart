@@ -1,7 +1,6 @@
 import 'package:gsheets/gsheets.dart';
 
 class GoogleSheetsApi {
-  // create credentials
   static const _credentials = {
     "type": "service_account",
     "project_id": "expense-tracker-356804",
@@ -19,7 +18,7 @@ class GoogleSheetsApi {
   };
 
   // set up & connect to the spreadsheet
-  static final _spreadsheetId = '1lRxRbc2QO1xe2bKcDWBDEReJ7Z21zMPbHsStQQrZ-Lw';
+  static const _spreadsheetId = '1lRxRbc2QO1xe2bKcDWBDEReJ7Z21zMPbHsStQQrZ-Lw';
   static final _gsheets = GSheets(_credentials);
   static Worksheet? _worksheet;
 
@@ -86,22 +85,22 @@ class GoogleSheetsApi {
   }
 
   // CALCULATE THE TOTAL INCOME!
-  static double calculateIncome() {
-    double totalIncome = 0;
+  static int calculateIncome() {
+    int totalIncome = 0;
     for (int i = 0; i < currentTransactions.length; i++) {
       if (currentTransactions[i][2] == 'income') {
-        totalIncome += double.parse(currentTransactions[i][1]);
+        totalIncome += int.parse(currentTransactions[i][1]);
       }
     }
     return totalIncome;
   }
 
   // CALCULATE THE TOTAL EXPENSE!
-  static double calculateExpense() {
-    double totalExpense = 0;
+  static int calculateExpense() {
+    int totalExpense = 0;
     for (int i = 0; i < currentTransactions.length; i++) {
       if (currentTransactions[i][2] == 'expense') {
-        totalExpense += double.parse(currentTransactions[i][1]);
+        totalExpense += int.parse(currentTransactions[i][1]);
       }
     }
     return totalExpense;

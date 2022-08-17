@@ -29,14 +29,14 @@ class MyTransaction extends StatelessWidget {
                     padding: EdgeInsets.all(5),
                     decoration: BoxDecoration(
                         shape: BoxShape.circle, color: Colors.grey[500]),
-                    child: Center(
+                    child: const Center(
                       child: Icon(
                         Icons.attach_money_outlined,
                         color: Colors.white,
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Text(transactionName,
@@ -49,7 +49,6 @@ class MyTransaction extends StatelessWidget {
               Text(
                 (expenseOrIncome == 'expense' ? '-' : '+') + '₹' + money,
                 style: TextStyle(
-                  //fontWeight: FontWeight.bold,
                   fontSize: 16,
                   color:
                       expenseOrIncome == 'expense' ? Colors.red : Colors.green,

@@ -46,8 +46,11 @@ class _HomePageState extends State<HomePage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text('Expense'),
+                          const Text('Expense'),
                           Switch(
+                            inactiveThumbColor: Colors.redAccent,
+                            inactiveTrackColor: Colors.redAccent[100],
+                            activeColor: Colors.green,
                             value: _isIncome,
                             onChanged: (newValue) {
                               setState(() {
@@ -55,10 +58,10 @@ class _HomePageState extends State<HomePage> {
                               });
                             },
                           ),
-                          Text('Income'),
+                          const Text('Income'),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Row(
@@ -68,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                               key: _formKey,
                               child: TextFormField(
                                 keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   hintText: 'Amount?',
                                 ),
@@ -84,14 +87,14 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Row(
                         children: [
                           Expanded(
                             child: TextField(
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
                                 hintText: 'For what?',
                               ),
@@ -106,15 +109,16 @@ class _HomePageState extends State<HomePage> {
                 actions: <Widget>[
                   MaterialButton(
                     color: Colors.grey[600],
-                    child:
-                        Text('Cancel', style: TextStyle(color: Colors.white)),
+                    child: const Text('Cancel',
+                        style: TextStyle(color: Colors.white)),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   ),
                   MaterialButton(
                     color: Colors.grey[600],
-                    child: Text('Enter', style: TextStyle(color: Colors.white)),
+                    child: const Text('Enter',
+                        style: TextStyle(color: Colors.white)),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _enterTransaction();
@@ -133,7 +137,7 @@ class _HomePageState extends State<HomePage> {
   bool timerHasStarted = false;
   void startLoading() {
     timerHasStarted = true;
-    Timer.periodic(Duration(seconds: 1), (timer) {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       if (GoogleSheetsApi.loading == false) {
         setState(() {});
         timer.cancel();
@@ -154,7 +158,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(25.0),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             TopNeuCard(
@@ -169,13 +173,14 @@ class _HomePageState extends State<HomePage> {
                 child: Center(
                   child: Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Expanded(
                         child: GoogleSheetsApi.loading == true
-                            ? LoadingCircle()
+                            ? const LoadingCircle()
                             : ListView.builder(
+                                reverse: true,
                                 itemCount:
                                     GoogleSheetsApi.currentTransactions.length,
                                 itemBuilder: (context, index) {
@@ -187,8 +192,9 @@ class _HomePageState extends State<HomePage> {
                                     expenseOrIncome: GoogleSheetsApi
                                         .currentTransactions[index][2],
                                   );
-                                }),
-                      )
+                                },
+                              ),
+                      ),
                     ],
                   ),
                 ),
@@ -196,6 +202,9 @@ class _HomePageState extends State<HomePage> {
             ),
             PlusButton(
               function: _newTransaction,
+            ),
+            const SizedBox(
+              height: 5,
             ),
           ],
         ),
